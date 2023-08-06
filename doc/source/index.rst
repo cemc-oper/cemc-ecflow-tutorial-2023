@@ -107,7 +107,7 @@ https://perillaroc.github.io/ecflow-tutorial-cn/
    :hidden:
    :caption: 进阶
 
-   advanced/create-model-task
-   advanced/create-post-tasks
-   advanced/create-archive-task
+   advanced/create-initial-task
+   advanced/add-time
+   advanced/add-repeat-date
    advanced/run-the-flow
