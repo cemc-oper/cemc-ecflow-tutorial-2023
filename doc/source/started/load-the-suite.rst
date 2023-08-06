@@ -6,7 +6,7 @@
 加载 suite
 ------------
 
-使用 ecFlow 命令行客户端命令 ``ecflow_client`` 加载 suite 定义文件 **cma_tym.def**：
+使用 ecFlow 命令行客户端命令 ``ecflow_client`` 加载 suite 定义文件 **cma_gfs_post.def**：
 
 .. note::
 
@@ -16,22 +16,24 @@
 .. code-block:: bash
 
     cd ${TUTORIAL_HOME}/def
-    ecflow_client --port 43083 --load cma_tym.def
+    ecflow_client --host login_a13 --port 43083 --load cma_gfs_post.def
 
 .. note::
 
     如果设置了环境变量 ``ECF_PORT``，可以不用显式设置 ``--port`` 参数。
 
+    如果在运行 ecFlow 服务的节点（login_a13）上运行命令，可以不用显式设置 ``--host`` 参数。
+
 查看 suite
 --------------
 
-在 ecFlowUI 中可以看到刚加载的工作流处于 unknown 状态。
+在 ecFlow UI 中可以看到刚加载的工作流处于 unknown 状态。
 
 .. image:: image/ecflow-ui-load-suite.png
 
-右键点击 cma_tym，单击 begin，可以启动 cma_tym 工作流。
-因为我们没有设置任何触发器，所以 copy_dir 任务会立刻执行。
-但因为我们还没编写任务脚本，ecFlow 会报错，ecFlowUI 会弹出一个窗口显示出错任务列表。
+右键点击 cma_gfs_post，单击 begin，可以启动 cma_gfs_post 工作流。
+因为我们没有设置任何触发器，所以 pre_data2grib2 任务会立刻执行。
+但因为我们还没编写任务脚本，ecFlow 会报错，ecFlow UI 会弹出一个窗口显示出错任务列表。
 出错的任务处于 aborted 状态。
 
 .. image:: image/ecflow-ui-load-suite-begin.png

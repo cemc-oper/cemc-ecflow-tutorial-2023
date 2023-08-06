@@ -4,13 +4,17 @@
 创建目录
 --------
 
-为教程创建目录，比如在用户临时空间中创建目录 ``/g8/JOB_TMP/wangdp/tutorial/ecflow``，并将该目录设为环境变量 ``TUTORIAL_HOME``。
+为教程创建目录，比如在用户临时空间中创建目录 ``/g7/JOB_TMP/wangdp/tutorial/ecflow``，并将该目录设为环境变量 ``TUTORIAL_HOME``。
 
 .. code-block:: shell
 
-    export TUTORIAL_HOME=/g8/JOB_TMP/wangdp/tutorial/ecflow
+    export TUTORIAL_HOME=/g7/JOB_TMP/wangdp/tutorial/ecflow
     mkdir -p ${TUTORIAL_HOME}
     cd ${TUTORIAL_HOME}
+
+.. note::
+
+    HPC2023 个人账户注销时间太短，注意重新登录进行后续操作前需要再次设置环境变量 ``TUTORIAL_HOME``
 
 在该目录中创建以下几个子目录：
 
@@ -29,15 +33,13 @@
 拷贝程序
 --------
 
-将 CMA-TYM 模式程序包拷贝到 ``program`` 目录下：
+将 CMA-GFS 后处理程序包拷贝到 ``program`` 目录下：
 
 .. note::
 
-    CMA-TYM 模式程序包来自当前业务运行按本，但经过删减，去掉本教程用不到的一些程序。
+    CMA-GFS 后处理序包来自 HPC2023 最新测试版本，但经过删减，去掉本教程用不到的一些程序。
 
 .. code-block:: shell
 
     cd ${TUTORIAL_HOME}/program
-    cp -r /g11/wangdp/project/course/ecflow/2022/package/grapes-tym-program .
-
-
+    cp -r ${TUTORIAL_PACKAGE}/cma-gfs-post-program .

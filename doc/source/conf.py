@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'cemc-ecflow-tutorial'
-copyright = '2022, perillaroc'
+copyright = '2023, perillaroc'
 author = 'perillaroc'
 
 
@@ -60,7 +60,7 @@ html_theme = 'sphinx_book_theme'
 html_static_path = ['_static']
 
 html_theme_options = {
-    "repository_url": "https://github.com/perillaroc/cemc-ecflow-tutorial-2022",
+    "repository_url": "https://github.com/perillaroc/cemc-ecflow-tutorial-2023",
     "use_repository_button": True,
     "home_page_in_toc": False,
 }
