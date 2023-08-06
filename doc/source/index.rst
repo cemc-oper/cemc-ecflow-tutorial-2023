@@ -91,18 +91,25 @@ https://perillaroc.github.io/ecflow-tutorial-cn/
    :hidden:
    :caption: 构建单个流程
 
+   single-hour/use-slurm-to-run-task
    single-hour/add-another-task
-   single-hour/add-family
-   single-hour/add-more-tasks
-   single-hour/use-script-to-ignore-task
-   single-hour/create-parallel-task
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: 构建多时效流程
+
+   multi-hour/add-family
+   multi-hour/add-more-tasks
+   multi-hour/use-script-to-ignore-task
+   multi-hour/create-parallel-task
 
 .. toctree::
    :maxdepth: 2
    :hidden:
    :caption: 进阶
 
-   multi-hour/create-model-task
-   multi-hour/create-post-tasks
-   multi-hour/create-archive-task
-   multi-hour/run-the-flow
+   advanced/create-model-task
+   advanced/create-post-tasks
+   advanced/create-archive-task
+   advanced/run-the-flow
