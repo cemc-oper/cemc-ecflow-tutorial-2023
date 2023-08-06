@@ -1,18 +1,16 @@
-添加 Family
+变量继承
 =============
 
-上一节仅生成 024 时效的 GRIB2 数据产品，本节中我们为 CMA-GFS 00 时次生成的 10 天 240 小时预报都生成 GRIB2 产品。
-
-下面将为每个时效创建一个 Family 节点。
+上节中我们为每个任务都设置的 Slurm 提交变量，实际上我们可以利用 ecFlow 的变量继承机制简化设置。
 
 修改工作流定义
 --------------
 
 更新 ``${TUTORIAL_HOME}/def`` 中的工作流定义文件 **cma_gfs_post.py**：
 
-.. code-block:: py
+.. code-block::
     :linenos:
-    :emphasize-lines: 47-48,52-62
+    :emphasize-lines: 50,58-59
 
     import os
 
@@ -63,6 +61,8 @@
         suite.add_limit("total_tasks", 10)
         suite.add_inlimit("total_tasks")
 
+        suite.add_variable(slurm_serial("serial", "105-09"))
+
         forecast_hour_list = [ f"{hour:03}" for hour in range(0, 241, 3)]
 
         for forecast_hour in forecast_hour_list:
@@ -70,7 +70,7 @@
                 fm_hour.add_variable("FHOUR", forecast_hour)
 
                 with fm_hour.add_task("pre_data2grib2") as tk_pre_data2grib2:
-                    tk_pre_data2grib2.add_variable(slurm_serial("serial", "105-09"))
+                    pass
 
                 with fm_hour.add_task("data2grib2") as tk_data2grib2:
                     tk_data2grib2.add_variable(slurm_parallel(4, 64, "normal", "105-09"))
@@ -80,41 +80,20 @@
     def_output_path = str(os.path.join(def_path, "cma_gfs_post.def"))
     defs.save_as_defs(def_output_path)
 
-47-48 行创建一个 Limit，并将该 Limit 应用到 cma_gfs_post 节点上，限制同时运行的任务不能超过 10 个。
-
-.. warning::
-
-    对于需要运行大量任务的工作流，一定要限制同时运行的任务数，避免同一时间大量提交作业导致 ecFlow 服务卡死。
-
-50-54 行为每个时效创建创建 Family，逐三小时创建以三位时效数字作为名称的任务。
+- 50 行：为整个 suite 添加串行作业提交需要的变量
+- 58-59 行：pre_data2grib2 任务无需再设置 slurm 提交变量
 
 更新工作流
------------
+--------------
 
-与前一节一样，需要重新生成 def 文件并更新到 ecFlow 服务中。
-在更新之前，我们先在 ecFlow UI 中将 cma_gfs_post 节点挂起，避免更新后系统提交大量作业。
-
-更新工作流：
+更新 ecFlow 上的工作流：
 
 .. code-block:: bash
 
-    cd ${TUTORIAL_HOME}/def
+    cd ${TUTORIAL_HOME}/def/ecffiles
     python3 cma_gfs_post.py
     ecflow_client --port 43083 --replace /cma_gfs_post cma_gfs_post.def
 
-更新任务脚本
-------------
+从截图中可以看到 suite 节点 cma_gfs_post 的 Slurm 提交相关变量：
 
-在 ``${TUTORIAL_HOME}/def/ecffiles`` 目录下更新 ecf 脚本 **pre_data2grib2.ecf** 和 **data2grib2.ecf**。
-使用 ``FHOUR`` 表示时效，将 ``forecast_hour=024`` 替换为 ``forecast_hour=%FHOUR%``。
-
-运行任务
----------
-
-创建脚本后，可以恢复 cma_gfs_post 自动运行。
-右键单击 cma_gfs_post，选择 Resume，恢复工作流运行。
-可以看到前 10 个作业开始运行：
-
-.. image:: image/ecflow-ui-run-limit.png
-
-因为我们创建的 Limit (total_tasks) 限制最多运行 10 个任务，所以有 1 个任务运行结束后第 11 个任务才会自动运行。
+.. image:: image/ecflow-ui-variable.png

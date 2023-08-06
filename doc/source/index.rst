@@ -100,9 +100,7 @@ https://perillaroc.github.io/ecflow-tutorial-cn/
    :caption: 构建多时效流程
 
    multi-hour/add-family
-   multi-hour/add-more-tasks
-   multi-hour/use-script-to-ignore-task
-   multi-hour/create-parallel-task
+   multi-hour/use-variable
 
 .. toctree::
    :maxdepth: 2
