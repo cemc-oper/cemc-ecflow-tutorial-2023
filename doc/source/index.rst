@@ -38,7 +38,7 @@ ecFlow 官网教程使用虚拟工作流，用简单的脚本模拟工作流运�
 
 如果大家对使用 ecFlow 感兴趣，可以访问 ECMWF 的官网查看最新教程（介绍最新的 v5 版本）：
 
-https://confluence.ecmwf.int/display/ECFLOW/Tutorial
+https://ecflow.readthedocs.io/en/latest/tutorial/tutorial.html
 
 也可以访问我之前翻译的中文版教程（仅介绍 v4 版本）：
 
